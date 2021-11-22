@@ -1,7 +1,7 @@
 import java.util.Vector;
 
 public class Course{
-    private String id, name;
+    private String id, name, timingCode;
     private int credits, seatsTotal, seatsAvailable;
     private Timetable timetable;
     private Vector<Student> studentsAlloted;
@@ -11,6 +11,7 @@ public class Course{
         this.id = id;
         this.name = name;
         this.credits = credits;
+        this.timingCode = timingCode;
         this.timetable = new Timetable(id, timingCode.split("/"));
         this.seatsTotal = seatsTotal;
         this.seatsAvailable = seatsTotal;
@@ -19,14 +20,14 @@ public class Course{
 
     public void addStudent (Student student)
     {
+        System.out.println("Adding student");
         studentsAlloted.addElement(student);
         seatsAvailable = seatsAvailable - 1;
     }
 
-    public Student[] getStudentsAlloted()
+    public Vector<Student> getStudentsAlloted()
     {
-        Student[] s = new Student[studentsAlloted.size()];
-        return studentsAlloted.toArray(s);
+        return studentsAlloted;
     }
 
     public boolean hasSeats()
@@ -50,10 +51,18 @@ public class Course{
     {
         return credits;
     }
+    public String getTimingCode()
+    {
+        return timingCode;
+    }
+    public String getName()
+    {
+        return name;
+    }
 
     public String toString()
     {
-        return id + " " + name + " " + credits + "\n" + timetable + "\n" + studentsAlloted;
+        return id + " " + name + " Credits: " + credits + " Timing :" + timingCode;
     }
 
     public String getID() {

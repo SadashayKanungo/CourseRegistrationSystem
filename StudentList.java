@@ -34,5 +34,15 @@ public class StudentList{
 	    //     }	     
 	    // }		
 	}
+	public static String print(Vector<Student> list) {
+		int size = list.size();
+		String str = "";
+
+		for(int i=0; i<size; i++){
+			Student s = list.get(i);
+			str += (i+1) + ". " + s.toString() + "\n";
+		}
+		return str;
+	}
 
 }

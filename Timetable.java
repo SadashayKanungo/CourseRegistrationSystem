@@ -18,6 +18,12 @@ public class Timetable
         //System.out.print("\n");
         return indexes;        
     }
+
+    Timetable ()
+    {
+        table = new String[TT_SIZE];
+        Arrays.fill(table, "");
+    }
     
     Timetable (String courseName, String[] timingCodes)
     {

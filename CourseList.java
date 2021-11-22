@@ -10,4 +10,14 @@ public class CourseList{
 		}
 		return new_list;
 	}
+	public static String print(Vector<Course> list) {
+		int size = list.size();
+		String str = "";
+
+		for(int i=0; i<size; i++){
+			Course c = list.get(i);
+			str += (i+1) + ". " + c.toString() + "\n";
+		}
+		return str;
+	}
 }
