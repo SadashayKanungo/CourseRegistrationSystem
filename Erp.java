@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class Erp{
-    private static final int CREDIT_LIMIT = 25;
+    private static final int CREDIT_LIMIT = 6;
     private static final String adminDataFile = "AdminData.csv";
     private static final String[] stati = {"Awaiting Student and Course Data", "Accepting Student Preferences", "Allotment Process Complete"};
     
@@ -15,7 +15,6 @@ public class Erp{
     private static Vector<Student> registeredStudents = new Vector<Student>();
     private static int statusIndex = 0;
 
-    private static boolean loginLoop = true;
     private static User loggedin = null;
 
     private static void clearScreen() {  
@@ -127,8 +126,8 @@ public class Erp{
                     int index = handleCourseID(crs_input);
                     Course c = availableCourses.get(index);
                     print("Course : "+ c.getName());
-                    print("Alloted Student List");
-                    StudentList.print(c.getStudentsAlloted());
+                    print("Alloted Student List " + c.getStudentsAlloted().size());
+                    print(StudentList.print(c.getStudentsAlloted()));
                     pressEnterToContinue();
                     continue;
                 case 4 :
@@ -222,21 +221,13 @@ public class Erp{
             int option = sc.nextInt();
             switch(option){
                 case 1 :
-                    print("Available Courses");
-                    print(CourseList.print(availableCourses));
+                    print("Alloted Courses");
+                    print(CourseList.print(s.getAllotedCourses()));
                     pressEnterToContinue();
                     continue;
                 case 2 :
-                    print("Enter Comma-separated numbers in order of preference");
-                    String pref_input = sc.next();
-                    String[] pref_str = pref_input.split(",");
-                    int[] pref_order = new int[pref_str.length];
-                    for(int i=0;i<pref_order.length;i++){
-                        pref_order[i] = Integer.parseInt(pref_str[i]);
-                    }
-                    s.setPreferences(CourseList.reorder(availableCourses,pref_order));
-                    print("Preferences Saved");
-                    print(CourseList.print(s.getPreferences()));
+                    print("Timetable");
+                    print(s.getTimetable().toString());
                     pressEnterToContinue();
                     continue;
                 case 3 :
@@ -261,7 +252,7 @@ public class Erp{
 
         sc = new Scanner(System.in);
         
-        while(loginLoop){
+        while(true){
             clearScreen();
             switch(statusIndex){
                 case 0:
@@ -292,22 +283,24 @@ public class Erp{
                             pressEnterToContinue();
                         }
                     }
-                    int index = handleStudentID(id_input);
-                    if(index < 0){
-                        print("ID Not Found");
-                        pressEnterToContinue();
-                    }
                     else{
-                        attempt = registeredStudents.get(index);
-                        print("ID Found :" + attempt.getName() + "\nEnter Password");
-                        pwd_input = sc.next();
-                        if(attempt.verify(pwd_input)){
-                            print("STUDENT LOGIN SUCCESSFUL");
-                            handleStudentLogin1(sc, attempt);
+                        int index = handleStudentID(id_input);
+                        if(index < 0){
+                            print("ID Not Found");
+                            pressEnterToContinue();
                         }
                         else{
-                            print("Incorrect Login Credentials!");
-                            pressEnterToContinue();
+                            attempt = registeredStudents.get(index);
+                            print("ID Found : " + attempt.getName() + "\nEnter Password");
+                            pwd_input = sc.next();
+                            if(attempt.verify(pwd_input)){
+                                print("STUDENT LOGIN SUCCESSFUL");
+                                handleStudentLogin1(sc, attempt);
+                            }
+                            else{
+                                print("Incorrect Login Credentials!");
+                                pressEnterToContinue();
+                            }
                         }
                     }
                     continue;
@@ -326,24 +319,27 @@ public class Erp{
                             pressEnterToContinue();
                         }
                     }
-                    index = handleStudentID(id_input);
-                    if(index < 0){
-                        print("ID Not Found");
-                        pressEnterToContinue();
-                    }
                     else{
-                        attempt = registeredStudents.get(index);
-                        print("ID Found :" + attempt.getName() + "\nEnter Password");
-                        pwd_input = sc.next();
-                        if(attempt.verify(pwd_input)){
-                            print("STUDENT LOGIN SUCCESSFUL");
-                            handleStudentLogin2(sc, attempt);
-                        }
-                        else{
-                            print("Incorrect Login Credentials!");
+                        int index = handleStudentID(id_input);
+                        if(index < 0){
+                            print("ID Not Found");
                             pressEnterToContinue();
                         }
+                        else{
+                            attempt = registeredStudents.get(index);
+                            print("ID Found :" + attempt.getName() + "\nEnter Password");
+                            pwd_input = sc.next();
+                            if(attempt.verify(pwd_input)){
+                                print("STUDENT LOGIN SUCCESSFUL");
+                                handleStudentLogin2(sc, attempt);
+                            }
+                            else{
+                                print("Incorrect Login Credentials!");
+                                pressEnterToContinue();
+                            }
+                        }
                     }
+                    
                     continue;
                 default:
                     break;

@@ -35,10 +35,9 @@ public class Student extends User{
         return this.credits;
     }	
 	
-	public Course[] getAllotedCourses()
+	public Vector<Course> getAllotedCourses()
 	{
-		Course[] c = new Course[allotedCourses.size()];
-		return allotedCourses.toArray(c);
+		return allotedCourses;
 	}
 	
 	public Timetable getTimetable() 
@@ -58,7 +57,7 @@ public class Student extends User{
 	
 	public String toString()
 	{
-		return this.getName() + " "+ prNumber + "\n" + preferences + "\n" + allotedCourses + "\n" + timetable;
+		return this.getID() + " " + this.getName();
 	}
 
 	
