@@ -12,15 +12,6 @@ public class Admin extends User {
 		super(id,password,name);
 	}
 
-    // public boolean startRegistration() {
-    //     // ERP function allotCourses() uses this
-    //     return true;
-    // }
-    // public boolean endRegistration() {
-    //     // ERP function allotCourses() uses this
-    //     return false;
-    // }
-
     public Vector<Student> enterStudents() throws FileNotFoundException{
         Scanner sc = new Scanner(new File(studentDataFile));
         Vector<Student> students = new Vector<Student>();
@@ -31,10 +22,6 @@ public class Admin extends User {
         }
         return students;
 
-        // System.out.println("Enter Course Name: ");
-        // Scanner sc= new Scanner(System.in);
-        // String a = sc.nextLine();
-        // ERP function setStudents() invoked
     }
     public Vector<Course> enterCourses() throws FileNotFoundException{
         Scanner sc = new Scanner(new File(courseDataFile));
@@ -46,9 +33,5 @@ public class Admin extends User {
         }
         return courses;
 
-        // System.out.println("Enter Course Name: ");
-        // Scanner sc= new Scanner(System.in);
-        // String a = sc.nextLine();
-        // ERP function setCourses() invoked
     }
 }

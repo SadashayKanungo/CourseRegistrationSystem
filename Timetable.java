@@ -95,16 +95,4 @@ public class Timetable
         }
         return s;
     }
-
-    // public static void main(String[] args){
-    //     String[] timingCodes = {"M W F 2", "Th 5"};
-    //     Timetable tt = new Timetable("ECONF211", timingCodes);
-    //     System.out.print(tt);
-    //     String[] timingCodes2 = {"T Th S 3", "M 5"};
-    //     Timetable tt2 = new Timetable("ECONF233", timingCodes2);
-    //     System.out.print(tt2);
-    //     System.out.println(tt.match(tt2));
-    //     tt.merge(tt2);
-    //     System.out.println(tt);
-    // }
 }
