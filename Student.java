@@ -26,7 +26,7 @@ public class Student extends User{
 	
 	public void addAllotedCourse(Course course)
 	{
-		System.out.println("Alloting Course");
+		System.out.println("Allotted Course "+course.getName());
 		this.allotedCourses.addElement(course);
 		this.credits += course.getCredits();
 		this.timetable.merge(course.getTimetable());

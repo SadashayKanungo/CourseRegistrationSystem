@@ -20,7 +20,6 @@ public class Course{
 
     public void addStudent (Student student)
     {
-        System.out.println("Adding student");
         studentsAlloted.addElement(student);
         seatsAvailable = seatsAvailable - 1;
     }
